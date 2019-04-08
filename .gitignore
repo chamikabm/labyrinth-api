@@ -1,3 +1,26 @@
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# npm
+node_modules
+package-lock.json
+
+# Optional npm cache directory
+.npm
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Idea
 .idea/
 ./node_modules
 *.iml
+
+
+# Build
+dist
+.env

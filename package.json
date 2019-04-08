@@ -1,11 +1,30 @@
 {
   "name": "labyrinth-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a API for solving labyrinths",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf dist && babel src -d dist",
+    "test": "NODE_ENV=test echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon",
+    "start": "NODE_ENV=development nodemon --signal SIGINT --exec babel-node src/index.js",
+    "prestart": "npm run build",
+    "serve": "NODE_ENV=production npm run build && node dist"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Chamika Kasun",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "nodemon": "^1.18.10",
+    "rimraf": "^2.6.3"
+  }
 }
