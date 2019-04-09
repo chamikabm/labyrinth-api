@@ -3,9 +3,14 @@ import express from 'express';
 import logger from './utils/logger';
 import routes from './routes';
 import { connectDb } from './database/db';
+import middlewareConfig from './middlewares/middleware';
+import { genericErrorHandler } from './middlewares/errorHandler';
 
 // Creating the express app.
 const app = express();
+
+// Configure Middleware.
+middlewareConfig(app);
 
 // Configure App Paths.
 // API Routes.
@@ -27,6 +32,8 @@ connectDb()
   })
   .catch(err => console.log(err));
 
+// Handle generic errors.
+app.use(genericErrorHandler);
 
 // Catch unhandled rejections
 process.on('unhandledRejection', err => {
