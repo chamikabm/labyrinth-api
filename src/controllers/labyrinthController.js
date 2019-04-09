@@ -73,7 +73,7 @@ export function updateLabyrinth(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .updateLabyrinth(req.params.id, req.params.x, req.params.y, req.params.type)
-    .then(data => res.status(HttpStatus.CREATED).json({ data }))
+    .then(data => res.status(HttpStatus.OK).json({ data }))
     .catch(err => next(err));
 }
 
@@ -88,7 +88,7 @@ export function updateLabyrinthStart(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth start update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .updateLabyrinthStart(req.params.id, req.params.x, req.params.y)
-    .then(data => res.status(HttpStatus.CREATED).json({ data }))
+    .then(data => res.status(HttpStatus.OK).json({ data }))
     .catch(err => next(err));
 }
 
@@ -103,7 +103,7 @@ export function updateLabyrinthEnd(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth end update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .updateLabyrinthEnd(req.params.id, req.params.x, req.params.y)
-    .then(data => res.status(HttpStatus.CREATED).json({ data }))
+    .then(data => res.status(HttpStatus.OK).json({ data }))
     .catch(err => next(err));
 }
 

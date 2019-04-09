@@ -1,0 +1,20 @@
+version: '3'
+services:
+  labyrinth-api:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+    - "3000:3000"
+    volumes:
+    - /app/node_modules
+    - .:/app
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+    - "27017:27017"
+

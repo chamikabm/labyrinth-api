@@ -1,0 +1,15 @@
+FROM node:8.11.1
+
+WORKDIR '/app'
+
+# Ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+
+RUN npm install
+
+# We don't copy over any other source files since we're
+# using volumes in development (specified in compose file)
+
+EXPOSE 3000
+CMD ["npm", "run", "start"]
+
