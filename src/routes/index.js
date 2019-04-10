@@ -14,13 +14,13 @@ router.get('/', (req, res) =>
   res.send('Hello from Labyrinth API.')
 );
 
+// mount auth routes at /auth
+router.use('/auth', authRoutes);
+
 // mount user routes at /users
 router.use('/users', userRoutes);
 
 // mount user routes at /gems
 router.use('/labyrinth', labyrinthRoutes);
-
-// mount auth routes at /auth
-router.use('/auth', authRoutes);
 
 export default router;
