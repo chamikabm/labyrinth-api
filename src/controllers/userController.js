@@ -10,9 +10,9 @@ import logger from '../utils/logger';
  * @param {Function} next
  */
 export function create(req, res, next) {
-  logger.info(`UserController - User create request received. req.body: ${JSON.stringify(req.body)}`);
+  logger.info(`UserController - User create request received. req.params: ${JSON.stringify(req.params)}`);
   userService
-    .createUser(req.body)
+    .createUser(req.params.username, req.params.password)
     .then(data => res.status(HttpStatus.CREATED).json({ data }))
     .catch(err => next(err));
 }

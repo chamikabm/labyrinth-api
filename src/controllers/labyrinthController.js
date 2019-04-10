@@ -10,9 +10,10 @@ import logger from "../utils/logger";
  * @param {Function} next
  */
 export function findLabyrinths(req, res, next) {
-  logger.info(`LabyrinthController - Fetch all Labyrinths request received. req.body: ${JSON.stringify(req.body)}`);
+  const user = req.user._id;
+  logger.info(`LabyrinthController - Fetch all Labyrinths request received. user: ${user}`);
   labyrinthService
-    .findLabyrinths(req.body)
+    .findLabyrinths(user)
     .then(data => res.json({ data }))
     .catch(err => next(err));
 }
@@ -25,9 +26,11 @@ export function findLabyrinths(req, res, next) {
  * @param {Function} next
  */
 export function findLabyrinthById(req, res, next) {
-  logger.info(`LabyrinthController - Labyrinth findById request received. req.params: ${JSON.stringify(req.params)}`);
+  const user = req.user._id;
+  const stateId = req.params.id;
+  logger.info(`LabyrinthController - Labyrinth findById request received.  user: ${user}, stateId: ${stateId}`);
   labyrinthService
-    .findLabyrinthById(req.params.id)
+    .findLabyrinthById(user, stateId)
     .then(data => res.json({ data }))
     .catch(err => next(err));
 }
@@ -55,15 +58,16 @@ export function labyrinthSolution(req, res, next) {
  * @param {Function} next
  */
 export function createLabyrinth(req, res, next) {
-  logger.info(`LabyrinthController - Labyrinth create request received. req.body: ${JSON.stringify(req.body)}`);
+  const user = req.user._id;
+  logger.info(`LabyrinthController - Labyrinth create request received. user: ${user}`);
   labyrinthService
-    .createLabyrinth(req.body)
+    .createLabyrinth(user)
     .then(data => res.status(HttpStatus.CREATED).json({ data }))
     .catch(err => next(err));
 }
 
 /**
- * Update existing Labyrinth.
+ * Update existing Labyrinth's Block Type.
  *
  * @param {Object} req
  * @param {Object} res
@@ -72,7 +76,7 @@ export function createLabyrinth(req, res, next) {
 export function updateLabyrinth(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
-    .updateLabyrinth(req.params.id, req.params.x, req.params.y, req.params.type)
+    .updateLabyrinthType(req.params.id, req.params.x, req.params.y, req.params.type)
     .then(data => res.status(HttpStatus.OK).json({ data }))
     .catch(err => next(err));
 }
