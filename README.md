@@ -31,4 +31,9 @@ Auth: BasicAuth.
   
   Returns a solution for the labyrinth in the form [ direction, direction, ... ]
   ----
+  
+  # How to Run the API
+  1. install docker and docker-compose
+  2. hit `docker-compose up` command from commandline.
+  3. API should be up and running in port `3000` in localhost.
 
