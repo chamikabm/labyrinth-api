@@ -33,7 +33,7 @@ connectDb()
   .catch(err => console.log(err));
 
 // Handle generic errors.
-app.use(genericErrorHandler);
+// app.use(genericErrorHandler);
 
 // Catch unhandled rejections
 process.on('unhandledRejection', err => {

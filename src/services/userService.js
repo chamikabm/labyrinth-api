@@ -11,14 +11,8 @@ import { User } from '../models';
 export function createUser(username, password) {
   logger.info(`UserService - createUser - Going to create the user. username : ${JSON.stringify(username)}`);
 
-  let user = new User({ username, password });
-  user.save((err, user) => {
-    if (err) {
-      return { error:err };
-    } else {
-      return user;
-    }
-  });
+  const user = new User({ username, password });
+  return user.save();
 }
 
 /**

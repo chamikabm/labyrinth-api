@@ -13,6 +13,12 @@ export function create(req, res, next) {
   logger.info(`UserController - User create request received. req.params: ${JSON.stringify(req.params)}`);
   userService
     .createUser(req.params.username, req.params.password)
-    .then(data => res.status(HttpStatus.CREATED).json({ data }))
-    .catch(err => next(err));
+    .then(data => {
+      logger.info(`UserController - User created successfully. ${JSON.stringify(data)}`);
+      return res.status(HttpStatus.CREATED).json({ data })
+    })
+    .catch(err => {
+      logger.error(`UserController - User creation failed. Error : ${JSON.stringify(err)}`);
+      return next(err);
+    });
 }
