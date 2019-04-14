@@ -14,7 +14,7 @@ export function findLabyrinths(req, res, next) {
   logger.info(`LabyrinthController - Fetch all Labyrinths request received. user: ${user}`);
   labyrinthService
     .findLabyrinths(user)
-    .then(data => res.json({ data }))
+    .then(data => res.json(data))
     .catch(err => next(err));
 }
 
@@ -31,7 +31,7 @@ export function findLabyrinthById(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth findById request received.  user: ${user}, stateId: ${stateId}`);
   labyrinthService
     .findLabyrinthById(user, stateId)
-    .then(data => res.json({ data }))
+    .then(data => res.json(data))
     .catch(err => next(err));
 }
 
@@ -46,7 +46,7 @@ export function labyrinthSolution(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth solution request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .labyrinthSolution(req.params.id)
-    .then(data => res.json({ data }))
+    .then(data => res.json(data))
     .catch(err => next(err));
 }
 
@@ -62,7 +62,7 @@ export function createLabyrinth(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth create request received. user: ${user}`);
   labyrinthService
     .createLabyrinth(user)
-    .then(data => res.status(HttpStatus.CREATED).json({ data }))
+    .then(data => res.status(HttpStatus.CREATED).json(data._id))
     .catch(err => next(err));
 }
 
@@ -77,7 +77,7 @@ export function updateLabyrinth(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .updateLabyrinthType(req.params.id, req.params.x, req.params.y, req.params.type)
-    .then(data => res.status(HttpStatus.OK).json({ data }))
+    .then(() => res.status(HttpStatus.OK))
     .catch(err => next(err));
 }
 
@@ -92,7 +92,7 @@ export function updateLabyrinthStart(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth start update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .updateLabyrinthStart(req.params.id, req.params.x, req.params.y)
-    .then(data => res.status(HttpStatus.OK).json({ data }))
+    .then(() => res.status(HttpStatus.OK))
     .catch(err => next(err));
 }
 
@@ -107,7 +107,7 @@ export function updateLabyrinthEnd(req, res, next) {
   logger.info(`LabyrinthController - Labyrinth end update request received. req.params: ${JSON.stringify(req.params)}`);
   labyrinthService
     .updateLabyrinthEnd(req.params.id, req.params.x, req.params.y)
-    .then(data => res.status(HttpStatus.OK).json({ data }))
+    .then(() => res.status(HttpStatus.OK))
     .catch(err => next(err));
 }
 

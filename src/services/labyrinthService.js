@@ -30,7 +30,7 @@ const labyrinths = ( userId, labyrinth ) => {
 };
 
 const findLabyrinths = ((user) => {
-  return labyrinths(user);
+  return labyrinths(user).then(libs => libs.map(lib => lib._id));
 });
 
 const findLabyrinthById = ((user, stateId) => {
