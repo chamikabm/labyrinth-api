@@ -38,23 +38,24 @@ const findLabyrinthById = ((user, stateId) => {
     if (data.length === 0) {
       return "Data not found";
     }
+    let  type;
     data.forEach(item => {
       item.playfield.forEach( state => {
         if(state._id == stateId) {
-          return state.type;
-        } else {
-          return "id not found";
+          type =  state.type;
         }
       });
-    })
+    });
+
+    return type || "Id not found.";
   }).catch( err => {
     return  new Promise({ error: err });
   })
 });
 
 const labyrinthSolution = ((id) => {
-  labyrinths(null, id).then( data => {
-    solveMaze(data[0]).then( solution => {
+  return labyrinths(null, id).then( data => {
+    return solveMaze(data[0]).then( solution => {
       return solution;
     })
   }).catch(err => {
