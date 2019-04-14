@@ -15,7 +15,7 @@ router.get('/', (req, res) =>
 );
 
 // mount auth routes at /auth
-router.use('/auth', authRoutes);
+router.use('/', authRoutes);
 
 // mount user routes at /users
 router.use('/users', userRoutes);
