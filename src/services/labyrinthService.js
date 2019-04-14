@@ -30,15 +30,14 @@ const labyrinths = ( userId, labyrinth ) => {
 };
 
 const findLabyrinths = ((user) => {
-  labyrinths(user).then( data => {
-    return data;
-  }).catch( err => {
-    return { error: err };
-  })
+  return labyrinths(user);
 });
 
 const findLabyrinthById = ((user, stateId) => {
-  labyrinths(user).then( data => {
+  return labyrinths(user).then( data => {
+    if (data.length === 0) {
+      return "Data not found";
+    }
     data.forEach(item => {
       item.playfield.forEach( state => {
         if(state._id == stateId) {
@@ -49,7 +48,7 @@ const findLabyrinthById = ((user, stateId) => {
       });
     })
   }).catch( err => {
-    return { error: err };
+    return  new Promise({ error: err });
   })
 });
 
@@ -64,18 +63,12 @@ const labyrinthSolution = ((id) => {
 });
 
 const createLabyrinth = ((user) => {
-  let labyrinth = new Labyrinth({ owner: user });
-  labyrinth.save( (err, data) => {
-    if (err) {
-      return { error: err };
-    } else {
-      return data._id;
-    }
-  });
+  const labyrinth = new Labyrinth({ owner: user });
+  return labyrinth.save();
 });
 
 const updateLabyrinthType = ((id, x, y, type) => {
-  labyrinths(null, id).then( data => {
+  return labyrinths(null, id).then( data => {
     let newData = data[0].playfield.filter( item => {
       if ((Number(item.x) === Number(x)) && ((Number(item.y) === Number(y)))) {
         return false;
@@ -84,43 +77,25 @@ const updateLabyrinthType = ((id, x, y, type) => {
     });
     data[0].playfield = newData;
     data[0].playfield.push({ x:x, y:y, type:type });
-    data[0].save(err => {
-      if(err) {
-        console.log(err)
-      } else {
-        return "data updated";
-      }
-    });
+    return data[0].save();
   }).catch(err => {
     return { error: err };
   });
 });
 
 const updateLabyrinthStart = ((id, x, y) => {
-  labyrinths(null, id).then( data => {
+  return labyrinths(null, id).then( data => {
     data[0].start = { x:x, y:y };
-    data[0].save(err => {
-      if(err) {
-        console.log(err)
-      } else {
-        return "data updated";
-      }
-    })
+    return data[0].save();
   }).catch(err => {
       return { error: err };
   });
 });
 
 const updateLabyrinthEnd = ((id, x, y) => {
-  labyrinths(null, id).then( data => {
+  return labyrinths(null, id).then( data => {
     data[0].end = { x:x, y:y };
-    data[0].save(err => {
-      if(err) {
-        console.log(err)
-      } else {
-        return "data updated";
-      }
-    })
+    return data[0].save();
   }).catch(err => {
     return { error: err };
   });
